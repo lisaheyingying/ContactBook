@@ -1,0 +1,10 @@
+{
+    "Title": "Address Book",
+    "Language":"EN",
+    "button.create": "Create Contact",
+    "button.update": "Update Contact",
+    "button.delete": "Delete Contact",
+    "button.save": "Save",
+    "button.cancel": "Cancel",
+    "deleteConfimation": "Are you sure you want to delete it?"
+}

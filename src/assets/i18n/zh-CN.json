@@ -1,0 +1,10 @@
+{
+    "Title": "通讯录",
+    "Language":"中文（简体）",
+    "button.create": "添加联系人",
+    "button.update": "编辑",
+    "button.delete": "删除",
+    "button.save": "保存",
+    "button.cancel": "取消",
+    "deleteConfimation": "确定要删除吗？"
+}

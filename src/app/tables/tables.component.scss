@@ -1,0 +1,18 @@
+td,
+th {
+  min-width: 100px;
+  text-align: center;
+  padding: 15px 5px;
+
+  &.highlight-blue {
+    color: deepskyblue;
+    font-weight: bold;
+  }
+  &.highlight-green {
+    color: green;
+    font-weight: bold;
+  }
+}
+.selected {
+  background-color: lightblue;
+}

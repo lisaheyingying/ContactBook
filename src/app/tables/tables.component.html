@@ -1,0 +1,31 @@
+<table [ngClass]="{'selected': isAllChosen===true}">
+  <thead>
+    <tr >
+      <th>
+          <input type="checkbox" id="isAllChosen" name="isAllChosen" [(ngModel)]="isAllChosen" (change)="selectAllChange()">
+      </th>
+      <th *ngFor="let head of tableHeader">
+       <span (click)="sortColumn(head.key)"> {{head.value}}</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rowContent of tableContent" [ngClass]="{'selected': rowContent.isChosen===true}">
+      <td>
+          <input type="checkbox" id="isChosen" name="isChosen" (change)="selectTargetChange(rowContent)" [(ngModel)]="rowContent.isChosen">
+      </td>
+      <td *ngFor="let head of tableHeader">
+        <div *ngIf="head.key==='cellPhone';then editableColumn else staticColumn"></div>
+          <ng-template #editableColumn>
+          <span [hidden]="rowContent.isEditing" (dblclick)="editTargetColumn(rowContent)">{{rowContent[head.key]}}</span>
+          <input [hidden]="!rowContent.isEditing" [(ngModel)]="rowContent.cellPhone" (blur)="doneEditingColumn(rowContent)" autofocus/> 
+          </ng-template>
+          <ng-template #staticColumn>
+              {{rowContent[head.key]}}
+          </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+

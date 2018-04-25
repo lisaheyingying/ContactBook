@@ -1,7 +1,5 @@
-import { concat } from 'rxjs/operators';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { FormControl, FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -38,7 +36,6 @@ export class ContactsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
-    private datePipe: DatePipe,
     private translate: TranslateService
   ) {
     translate.setDefaultLang(this.currentLanguage);

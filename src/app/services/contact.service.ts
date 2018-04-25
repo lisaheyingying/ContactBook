@@ -24,7 +24,9 @@ export class ContactService {
     return this.allContacts;
  }
  addContact(contact: Contact): Contact {
-   const ID  = this.allContacts.length + 1;
+   const ID  = this.allContacts.reduce((a, b) => {
+     return Math.max(a, b._id);
+   }, 0) + 1;
    contact._id = ID;
    contact.cellPhone = 'changeIt';
    contact.city = 'changeIt';

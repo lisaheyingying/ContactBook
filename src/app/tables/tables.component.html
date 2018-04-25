@@ -15,14 +15,14 @@
           <input type="checkbox" id="isChosen" name="isChosen" (change)="selectTargetChange(rowContent)" [(ngModel)]="rowContent.isChosen">
       </td>
       <td *ngFor="let head of tableHeader">
-        <div *ngIf="head.key==='cellPhone';then editableColumn else staticColumn"></div>
-          <ng-template #editableColumn>
-          <span [hidden]="rowContent.isEditing" (dblclick)="editTargetColumn(rowContent)">{{rowContent[head.key]}}</span>
-          <input [hidden]="!rowContent.isEditing" [(ngModel)]="rowContent.cellPhone" (blur)="doneEditingColumn(rowContent)" autofocus/> 
-          </ng-template>
-          <ng-template #staticColumn>
-              {{rowContent[head.key]}}
-          </ng-template>
+        <div *ngIf="rowContent.isEditing then editTemplate else staticTemplate"></div>
+        <ng-template #editTemplate>
+          <span [hidden]="head.key=== editKey" (dblclick)="editTargetColumn(rowContent, head.key)">{{rowContent[head.key]}}</span>
+          <input [hidden]="head.key !== editKey" [(ngModel)]="rowContent[head.key]" (blur)="doneEditingColumn(rowContent)" (keyup.enter)="doneEditingColumn(rowContent)" autofocus/> 
+        </ng-template>
+        <ng-template #staticTemplate>
+            <span (dblclick)="editTargetColumn(rowContent, head.key)">{{rowContent[head.key]}}</span>
+        </ng-template>
       </td>
     </tr>
   </tbody>

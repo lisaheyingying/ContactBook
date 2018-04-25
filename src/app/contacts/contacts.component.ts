@@ -1,3 +1,4 @@
+import { concat } from 'rxjs/operators';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -55,10 +56,15 @@ export class ContactsComponent implements OnInit {
       this.currentContact = null;
     }
   }
-
   onCreateContact() {
     const contact: Contact = new Contact();
-    this.contactService.addContact(contact);
+    this.currentContact = this.contactService.addContact(contact);
+    this.addressBookContent = this.contactService.listContacts();
+    this.addressBookContent = this.addressBookContent.map(people => {
+      people.isChosen = false;
+      return people;
+    });
+   this.currentContact.isChosen = true;
   }
   onUpdateContact(contact: Contact) {
     this.tempContact = JSON.parse(JSON.stringify(contact));
@@ -73,6 +79,7 @@ export class ContactsComponent implements OnInit {
     this.contactService.deleteContact(contact);
     this.currentContact.isChosen = false;
     this.currentContact = null;
+    this.addressBookContent = this.contactService.listContacts();
   }
   switchLanguage() {
     this.currentLanguage = this.currentLanguage === 'en' ? 'zh-CN' : 'en';

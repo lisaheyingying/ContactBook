@@ -13,6 +13,7 @@ export class TablesComponent {
 
   isAllChosen: boolean = false;
   selectedTarget: Contact = null;
+  editKey: string = '';
   @Input() tableHeader: { key: string, value: string }[];
   @Input() tableContent: Contact[];
   @Output() selectedContact = new EventEmitter();
@@ -34,13 +35,27 @@ export class TablesComponent {
     }
     this.selectedContact.emit(contact);
   }
-  editTargetColumn(contact: Contact) {
-    contact.isEditing = true;
+  editTargetColumn(contact: Contact, key: string) {
+    if (key === 'cellPhone') {
+      contact.isChosen = true;
+    }
+    if (contact.isChosen) {
+      this.editKey = key;
+      contact.isEditing = true;
+      this.selectTargetChange(contact);
+    }
   }
   doneEditingColumn(contact: Contact) {
     contact.isEditing = false;
   }
   sortColumn(column) {
-    this.tableContent =  this.tableContent.sort((a, b) => a[column] - b[column]);
+    this.tableContent =  this.tableContent.sort((a, b) => {
+      if (a[column] > b[column]) {
+         return 1;
+      } else if (a[column] < b[column]) {
+         return -1;
+      }
+      return 0;
+    });
   }
 }

@@ -23,10 +23,16 @@ export class ContactService {
  listContacts(): Contact[] {
     return this.allContacts;
  }
- addContact(contact: Contact): void {
+ addContact(contact: Contact): Contact {
    const ID  = this.allContacts.length + 1;
    contact._id = ID;
+   contact.cellPhone = 'changeIt';
+   contact.city = 'changeIt';
+   contact.name = 'changeIt';
+   contact.officeAddress = 'changeIt';
+   contact.officePhone = 'changeIt';
    this.allContacts.push(contact);
+   return contact;
  }
  deleteContact(contact: Contact): void {
    const index = this.allContacts.findIndex(member => member._id === contact._id);

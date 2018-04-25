@@ -36,14 +36,8 @@ export class TablesComponent {
     this.selectedContact.emit(contact);
   }
   editTargetColumn(contact: Contact, key: string) {
-    if (key === 'cellPhone') {
-      contact.isChosen = true;
-    }
-    if (contact.isChosen) {
       this.editKey = key;
       contact.isEditing = true;
-      this.selectTargetChange(contact);
-    }
   }
   doneEditingColumn(contact: Contact) {
     contact.isEditing = false;
